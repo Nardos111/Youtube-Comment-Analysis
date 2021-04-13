@@ -15,6 +15,7 @@ def scrape(url):
         title = driver.find_element_by_xpath(
             '//*[@id="container"]/h1/yt-formatted-string').text
         comment_section = driver.find_element_by_xpath('//*[@id="comments"]')
+
     # Raise an error in case elements provided cannot be found
     except exceptions.NoSuchElementException:
         error = "Can't find element"
@@ -31,7 +32,7 @@ def scrape(url):
     while True:
         driver.execute_script(
             "window.scrollTo(0, document.documentElement.scrollHeight);")
-        time.sleep(2)
+        time.sleep(3)
 
         # Calculate new scroll height and compare with last scroll height
         new_height = driver.execute_script(
@@ -45,9 +46,15 @@ def scrape(url):
         "window.scrollTo(0, document.documentElement.scrollHeight);")
 
     try:
+        # driver.find_elements_by_xpath(
+        #     "//ytd-button-renderer[@id='more-replies']/a/paper-button[@id='button']").click()
         # Extract elements storing username and comment
+        # read_more = driver.find_element_by_xpath('//*[@id="more"]')
+
         username_elems = driver.find_elements_by_xpath(
             '//*[@id="author-text"]')
+
+        # driver.find_element_by_id('//*[@id="more"]').click()
         comment_elems = driver.find_elements_by_xpath(
             '//*[@id="content-text"]')
 
@@ -62,6 +69,16 @@ def scrape(url):
         writer.writerow(["Username", "Comment"])
         for username, comment in zip(username_elems, comment_elems):
             writer.writerow([username.text, comment.text])
+
+    duration = driver.find_element_by_class_name("ytp-time-duration").text
+    views = driver.find_element_by_xpath(
+        '//*[@id="count"]/ytd-video-view-count-renderer/span').text
+    like = driver.find_element_by_xpath(
+        '//yt-formatted-string[@id="text" and @class="style-scope ytd-toggle-button-renderer style-text"]').get_attribute("aria-label")
+
+    print(duration)
+    print(views)
+    print(like)
 
     driver.close()
 
