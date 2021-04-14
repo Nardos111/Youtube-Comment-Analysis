@@ -37,6 +37,16 @@ def scrape(url):
         # Calculate new scroll height and compare with last scroll height
         new_height = driver.execute_script(
             "return document.documentElement.scrollHeight")
+        read_more = driver.find_element_by_xpath(
+            '//*[@id="more"]/yt-formatted-string')
+        driver.execute_script("arguments[0].click();", read_more)
+        sort_by = driver.find_element_by_xpath(
+            '//*[@id="label" and @class="dropdown-trigger style-scope yt-dropdown-menu"]')
+        driver.execute_script("arguments[0].click();", sort_by)
+        topComment = driver.find_element_by_xpath(
+            '//*[@id="menu"]/a[1]/tp-yt-paper-item')
+        driver.execute_script("arguments[0].click();", topComment)
+
         if new_height == last_height:
             break
         last_height = new_height
@@ -46,10 +56,6 @@ def scrape(url):
         "window.scrollTo(0, document.documentElement.scrollHeight);")
 
     try:
-        # driver.find_elements_by_xpath(
-        #     "//ytd-button-renderer[@id='more-replies']/a/paper-button[@id='button']").click()
-        # Extract elements storing username and comment
-        # read_more = driver.find_element_by_xpath('//*[@id="more"]')
 
         username_elems = driver.find_elements_by_xpath(
             '//*[@id="author-text"]')
@@ -73,15 +79,28 @@ def scrape(url):
     duration = driver.find_element_by_class_name("ytp-time-duration").text
     views = driver.find_element_by_xpath(
         '//*[@id="count"]/ytd-video-view-count-renderer/span').text
-    like = driver.find_element_by_xpath(
-        '//yt-formatted-string[@id="text" and @class="style-scope ytd-toggle-button-renderer style-text"]').get_attribute("aria-label")
+    likes = driver.find_element_by_xpath(
+        '(//yt-formatted-string[@id="text" and @class="style-scope ytd-toggle-button-renderer style-text"])[1]').get_attribute("aria-label")
+    dislikes = driver.find_element_by_xpath(
+        '(//yt-formatted-string[@id="text" and @class="style-scope ytd-toggle-button-renderer style-text"])[2]').get_attribute("aria-label")
+    more = driver.find_element_by_xpath('//*[@id="more"]/yt-formatted-string')
+    driver.execute_script("arguments[0].click();", more)
 
-    print(duration)
-    print(views)
-    print(like)
+    descriptions = driver.find_elements_by_xpath(
+        '//*[@id="description"]/yt-formatted-string')
+    texts = []
+    for description in descriptions:
+        text = description.text
+        texts.append(text)
+
+    desc = texts[0].replace("\n", "")
+    info = [duration, views, likes, dislikes, desc]
 
     driver.close()
+    return(info)
 
 
 if __name__ == "__main__":
-    scrape("https://www.youtube.com/watch?v=26vwOR1oCGE&ab_channel=LekemAmsal")
+    information = scrape(
+        "https://www.youtube.com/watch?v=HDXdfVLlCCA&ab_channel=AgainstAllOddsPodcast")
+    print(information[0])
