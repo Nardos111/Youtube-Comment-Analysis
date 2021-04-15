@@ -118,3 +118,39 @@ hr.star-primary:after {
 .footer {
     text-align: center;
 }
+.url {
+   padding-top: 50px;
+}
+.form-outline {
+   align-self: center;
+
+
+}
+.submit {
+   margin-top: 40px;
+
+   transition: all 0.5s !important;
+
+   transform: scale(1.2);
+
+}
+
+.submit:hover {
+   background-color: rgb(21, 63, 143) !important;
+   transform: scale(1.1);
+}
+#alert {
+   font-weight: 900;
+   margin-top: 30px;
+   font-size: larger;
+}
+
+.blink_me {
+   animation: blinker 0.8s linear infinite;
+ }
+ 
+ @keyframes blinker {
+   50% {
+     opacity: 0;
+   }
+ }
