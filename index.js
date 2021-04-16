@@ -7,18 +7,15 @@ function submit() {
     p = document.getElementById("alert");
     p.style.color = "white";
     check = validateYouTubeUrl(url);
-    window.alert(check);
+    alert(check);
   }
 }
 
 function validateYouTubeUrl(url) {
-  if (url != undefined || url != "") {
-    var regExp = /^.*(youtu.be/|v/|u/w/|embed/|watch?v=|&v=|?v=)([^#&?]*).*/;
-    var match = url.match(regExp);
-    if (match && match[2].length == 11) {
-      return True;
-    } else {
-      return False;
-    }
+  var matches = url.match(/watch\?v=([a-zA-Z0-9\-_]+)/);
+  if (matches) {
+    return true;
+  } else {
+    return false;
   }
 }
