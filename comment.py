@@ -100,7 +100,5 @@ def scrape(url):
     return(info)
 
 
-if __name__ == "__main__":
-    information = scrape(
-        "https://www.youtube.com/watch?v=HDXdfVLlCCA&ab_channel=AgainstAllOddsPodcast")
-    print(information[0])
+# if __name__ == "__main__":
+#     scrape(url)

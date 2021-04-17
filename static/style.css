@@ -34,7 +34,7 @@ font-size: 24px;
 
 
 .banner {
-   background: url('./bg.jpeg');
+   background: url("{{ url_for('static', filename='bg.jpeg') }}");
    background-repeat:no-repeat;
    background-position: top center;
    background-size: cover;
