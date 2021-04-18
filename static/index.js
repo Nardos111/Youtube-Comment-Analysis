@@ -1,5 +1,6 @@
 function submit() {
   var url = document.getElementById("typeURL").value;
+  console.log(url);
   if (url == "") {
     p = document.getElementById("alert");
     p.style.color = "rgb(194, 35, 35)";
@@ -8,7 +9,8 @@ function submit() {
     p.style.color = "white";
     check = validateYouTubeUrl(url);
     if (check) {
-      analyse(url);
+      //comments(url);
+      console.log(url);
     }
   }
 }
@@ -22,12 +24,12 @@ function validateYouTubeUrl(url) {
   }
 }
 
-function analyse(url) {
-  $.ajax({
-    type: "POST",
-    url: "/comment/",
-    data: { param: url },
-  }).done(function (o) {
-    alert("Done");
-  });
-}
+// function comments(url) {
+//   $.ajax({
+//     type: "POST",
+//     url: "/comment/",
+//     data: { param: url },
+//   }).done(function (o) {
+//     alert("Done");
+//   });
+// }
