@@ -97,7 +97,7 @@ def scrape(url):
     info = [duration, views, likes, dislikes, desc]
 
     driver.close()
-    return(info)
+    return "OK"
 
 
 # if __name__ == "__main__":

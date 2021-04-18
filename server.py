@@ -8,11 +8,23 @@ def index():
     return render_template('index.html')
 
 
-# @app.route('/comment/', methods=['GET', 'POST'])
-# def analyse():
-#     url = request.args.get('param')
-#     return scrape(url)
+@app.route('/comment/', methods=['GET', 'POST'])
+def analyse():
+    if request.method == "POST":
+        try:
+            url = request.form['url_link']
+            return scrape(url)
+        except:
+            return "Can't access video"
 
+
+if app.config["DEBUG"]:
+    @app.after_request
+    def after_request(response):
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, public, max-age=0"
+        response.headers["Expires"] = 0
+        response.headers["Pragma"] = "no-cache"
+        return response
 
 if __name__ == '__main__':
     app.run()
