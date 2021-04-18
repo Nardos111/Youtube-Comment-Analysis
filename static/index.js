@@ -1,5 +1,7 @@
 function submit() {
   var url = document.getElementById("typeURL").value;
+  document.getElementById("alert").classList.add("blink_me")
+  document.getElementById("alert").style.color = "white"
   if (url == "") {
     var p = document.getElementById("alert");
     p.style.color = "rgb(194, 35, 35)";
@@ -28,12 +30,15 @@ function validateYouTubeUrl(url) {
 }
 
 function comments(url) {
-  console.log(url)
+  document.getElementById("alert").classList.remove("blink_me")
+  document.getElementById("alert").innerHTML = "Processing. This will only take few minutes";
+  document.getElementById("alert").style.color = "green"
   $.ajax({
     type: "POST",
     url: "/comment",
     data: { url_link: url},
   }).done(function (o) {
+    document.getElementById("alert").innerHTML = "Done!";
     alert("Done");
   });
 }
