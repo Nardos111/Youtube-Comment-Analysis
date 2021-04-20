@@ -3,6 +3,7 @@ import csv
 import io
 from selenium import webdriver
 from selenium.common import exceptions
+from emotion_detection import posaneg
 
 
 def scrape(url):
@@ -68,8 +69,6 @@ def scrape(url):
         error = "Can't find element"
         print(error)
 
-    print("> VIDEO TITLE: " + title + "\n")
-
     with io.open('results.csv', 'w', newline='', encoding="utf-16") as file:
         writer = csv.writer(file, delimiter=",", quoting=csv.QUOTE_ALL)
         writer.writerow(["Username", "Comment"])
@@ -94,11 +93,9 @@ def scrape(url):
         texts.append(text)
 
     desc = texts[0].replace("\n", "")
-    info = [duration, views, likes, dislikes, desc]
+    info = [duration, views, likes, dislikes, desc, title]
 
-    driver.close()
-    return "OK"
-
-
-# if __name__ == "__main__":
-#     scrape(url)
+    driver.quit()
+    time.sleep(5)
+    posaneg()
+    return ('', 204)
