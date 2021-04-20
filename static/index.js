@@ -41,3 +41,4 @@ function comments(url) {
     document.getElementById("alert").innerHTML = "Video Comments Scraped!";
   });
 }
+

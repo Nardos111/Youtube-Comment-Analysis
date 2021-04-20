@@ -24,10 +24,13 @@ def posaneg():
             positive_comments.append(comment)
         else:
             negative_comments.append(comment)
+    pl = len(positive_comments)
+    nl = len(negative_comments)
+
     with io.open('comment_class.csv', 'w', newline='', encoding="utf-16") as file:
         writer = csv.writer(file)
-        writer.writerow(positive_comments)
-        writer.writerow(negative_comments)
+        writer.writerow([pl])
+        writer.writerow([nl])
     return
 
 

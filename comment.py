@@ -64,11 +64,9 @@ def scrape(url):
         # driver.find_element_by_id('//*[@id="more"]').click()
         comment_elems = driver.find_elements_by_xpath(
             '//*[@id="content-text"]')
-
     except exceptions.NoSuchElementException:
         error = "Can't find element"
         print(error)
-
     with io.open('results.csv', 'w', newline='', encoding="utf-16") as file:
         writer = csv.writer(file, delimiter=",", quoting=csv.QUOTE_ALL)
         writer.writerow(["Username", "Comment"])
@@ -94,6 +92,10 @@ def scrape(url):
 
     desc = texts[0].replace("\n", "")
     info = [duration, views, likes, dislikes, desc, title]
+
+    with io.open('video_info.csv', 'w', newline='', encoding="utf-16") as file:
+        writer = csv.writer(file)
+        writer.writerow([info])
 
     driver.quit()
     time.sleep(5)
