@@ -39,6 +39,11 @@ function comments(url) {
     data: { url_link: url},
   }).done(function (o) {
     document.getElementById("alert").innerHTML = "Video Comments Scraped!";
+    displayInfo()
+
   });
 }
 
+function displayInfo(){
+  alert("done")
+}
