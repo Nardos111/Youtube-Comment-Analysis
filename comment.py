@@ -37,18 +37,20 @@ def scrape(url):
         href = []
         title = []
         image_urls = []
-        while tcount < 5:
+        while tcount < 4:
             href.append(vtitle[tcount].get_attribute('href'))
             title.append(vtitle[tcount].text)
             image_urls.append(images[tcount].get_attribute('src'))
             tcount += 1
         tcount = 0
-        while tcount < 5:
+        print(image_urls)
+        while tcount < 4:
             youtube_dict = {}
             url = href[tcount]
+
             request.urlretrieve(
                 image_urls[tcount], "./static/%s.jpg" % str(tcount+1))
-            print(url)
+
             driver.get(url)
             time.sleep(5)
             try:
