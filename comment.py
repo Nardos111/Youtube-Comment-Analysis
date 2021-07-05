@@ -5,6 +5,7 @@ import csv
 import pandas as pd
 from math import ceil
 from selenium.common.exceptions import NoSuchElementException
+from urllib import request
 
 
 def scrape(url):
@@ -30,18 +31,23 @@ def scrape(url):
         time.sleep(20)
         vtitle = driver.find_elements_by_xpath(
             '//a[@id="video-title" and @class="yt-simple-endpoint style-scope ytd-video-renderer"]')
+        images = driver.find_elements_by_xpath(
+            '//div[@id="dismissible" and @class="style-scope ytd-video-renderer"]//a[@id="thumbnail" and @class="yt-simple-endpoint inline-block style-scope ytd-thumbnail"]//img[@id="img" and @class="style-scope yt-img-shadow"]')
         tcount = 0
         href = []
         title = []
+        image_urls = []
         while tcount < 5:
             href.append(vtitle[tcount].get_attribute('href'))
             title.append(vtitle[tcount].text)
+            image_urls.append(images[tcount].get_attribute('src'))
             tcount += 1
-
         tcount = 0
         while tcount < 5:
             youtube_dict = {}
             url = href[tcount]
+            request.urlretrieve(
+                image_urls[tcount], "./static/%s.jpg" % str(tcount+1))
             print(url)
             driver.get(url)
             time.sleep(5)
@@ -70,7 +76,6 @@ def scrape(url):
                     driver.execute_script("arguments[0].click();", topComment)
                 except NoSuchElementException:
                     sort = ""
-
                 try:
                     more = driver.find_element_by_xpath(
                         '//*[@id="more"]/yt-formatted-string')
