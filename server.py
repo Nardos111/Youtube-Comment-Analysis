@@ -28,3 +28,9 @@ if app.config["DEBUG"]:
 
 if __name__ == '__main__':
     app.run()
+
+
+@app.after_request
+def add_header(response):
+    response.cache_control.max_age = 300
+    return response
