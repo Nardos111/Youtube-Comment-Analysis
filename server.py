@@ -12,8 +12,8 @@ def index():
 def analyse():
     if request.method == "POST":
         try:
-            url = request.form['url_link']
-            return scrape(url)
+            key = request.form['keyword']
+            return scrape(key)
         except:
             return "Can't access video"
 

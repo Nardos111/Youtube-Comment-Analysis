@@ -1,22 +1,15 @@
 function submit() {
-  var url = document.getElementById("typeURL").value;
+  var key = document.getElementById("typeURL").value;
   document.getElementById("alert").classList.add("blink_me")
   document.getElementById("alert").style.color = "white"
-  if (url == "") {
+  if (key == "") {
     var p = document.getElementById("alert");
     p.style.color = "rgb(194, 35, 35)";
   } else {
     p = document.getElementById("alert");
     p.style.color = "white";
-    check = validateYouTubeUrl(url);
-    if (check) {
-    comments(url);
-    }
-    else {
-      document.getElementById("alert").innerHTML = "⚠️ Invalid URL";
-      var pa = document.getElementById("alert")
-      pa.style.color = "rgb(194, 35, 35)"
-    }
+    // check = validateYouTubeUrl(url);
+    comments(key);
   }
 }
 
@@ -29,14 +22,14 @@ function validateYouTubeUrl(url) {
   }
 }
 
-function comments(url) {
+function comments(key) {
   document.getElementById("alert").classList.remove("blink_me")
   document.getElementById("alert").innerHTML = "Processing. This will only take few minutes";
   document.getElementById("alert").style.color = "green"
   $.ajax({
     type: "POST",
     url: "/comment",
-    data: { url_link: url},
+    data: { keyword: key },
   }).done(function (o) {
     document.getElementById("alert").innerHTML = "Video Comments Scraped!";
     displayInfo()
@@ -44,6 +37,6 @@ function comments(url) {
   });
 }
 
-function displayInfo(){
+function displayInfo() {
   alert("done")
 }
