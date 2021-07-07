@@ -50,7 +50,7 @@ function displayVideos() {
   var sec = document.getElementById("portfolio")
   sec.removeAttribute("hidden")
   var mainC = document.getElementsByClassName("allVideos")
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 4; i++) {
     var c = document.createElement("div")
     c.setAttribute("class", "col-lg-12 container videos")
     var imageContainer = document.createElement("div")

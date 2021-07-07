@@ -37,14 +37,14 @@ def scrape(url):
         href = []
         title = []
         image_urls = []
-        while tcount < 2:
+        while tcount < 4:
             href.append(vtitle[tcount].get_attribute('href'))
             title.append(vtitle[tcount].text)
             image_urls.append(images[tcount].get_attribute('src'))
             tcount += 1
         tcount = 0
         print(image_urls)
-        while tcount < 2:
+        while tcount < 4:
             youtube_dict = {}
             url = href[tcount]
 
@@ -112,10 +112,10 @@ def scrape(url):
                 totalcomments = len(driver.find_elements_by_xpath(
                     """//*[@id="content-text"]"""))
 
-                if totalcomments < 50:
+                if totalcomments < 70:
                     index = totalcomments
                 else:
-                    index = 50
+                    index = 70
 
                 ccount = 0
                 while ccount < index:
@@ -131,7 +131,7 @@ def scrape(url):
                         upvotes = ""
 
                     youtube_dict['number'] = tcount
-                    youtube_dict['comment'] = comment
+                    youtube_dict['comments'] = comment
                     youtube_dict['upvotes'] = upvotes
 
                     writer.writerow(youtube_dict.values())

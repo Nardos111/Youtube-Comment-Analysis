@@ -20,8 +20,8 @@ def serve_static():
         return ""
 
 
-@app.route('./video_info.csv', methods=['GET'])
-def serve_static():
+@app.route('/video_info.csv', methods=['GET'])
+def serve_static2():
     try:
         return send_file('./video_info.csv',
                          mimetype='text/csv',
