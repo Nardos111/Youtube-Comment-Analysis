@@ -10,7 +10,7 @@ from urllib import request
 
 def scrape(url):
     csv_file = open('./output_scraping.csv', 'w', encoding="UTF-8", newline="")
-    csv_file2 = open('./video_info2.csv', 'w', encoding="UTF-8", newline="")
+    csv_file2 = open('./video_info.csv', 'w', encoding="UTF-8", newline="")
     writer = csv.writer(csv_file)
     writer2 = csv.writer(csv_file2)
     writer.writerow(
@@ -37,14 +37,14 @@ def scrape(url):
         href = []
         title = []
         image_urls = []
-        while tcount < 4:
+        while tcount < 2:
             href.append(vtitle[tcount].get_attribute('href'))
             title.append(vtitle[tcount].text)
             image_urls.append(images[tcount].get_attribute('src'))
             tcount += 1
         tcount = 0
         print(image_urls)
-        while tcount < 4:
+        while tcount < 2:
             youtube_dict = {}
             url = href[tcount]
 
