@@ -50,7 +50,7 @@ function displayVideos() {
   var sec = document.getElementById("portfolio")
   sec.removeAttribute("hidden")
   var mainC = document.getElementsByClassName("allVideos")
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 2; i++) {
     var c = document.createElement("div")
     c.setAttribute("class", "col-lg-12 container videos")
     var imageContainer = document.createElement("div")
@@ -62,11 +62,20 @@ function displayVideos() {
     imageContainer.appendChild(image)
     c.appendChild(imageContainer)
     mainC[0].appendChild(c)
+
     $.ajax({
-      type: "GET",
-      url: "video_info.csv",
-      dataType: "text",
-      success: function (data) { console.log(data); }
-    });
+      type: "POST",
+      url: "/clean/"
+    }).done(function (o) {
+      console.log("Done")
+    })
+    // .done(function (o) {
+    //   console.log(o)
+    //   $.ajax({
+    //     type: "POST",
+    //     url: "/clean/",
+    //     data: { param: o }
+    //   })
+    // });
   }
 }

@@ -14,7 +14,7 @@ def scrape(url):
     writer = csv.writer(csv_file)
     writer2 = csv.writer(csv_file2)
     writer.writerow(
-        ['number', 'comment', 'upvotes'])
+        ['number', 'comments', 'upvotes'])
     writer2.writerow(['url', 'link_title', 'description', 'channel',
                       'no_of_views', 'time_uploaded', 'likes', 'dislikes'])
     youtube_pages = "https://www.youtube.com/"
@@ -37,14 +37,14 @@ def scrape(url):
         href = []
         title = []
         image_urls = []
-        while tcount < 4:
+        while tcount < 2:
             href.append(vtitle[tcount].get_attribute('href'))
             title.append(vtitle[tcount].text)
             image_urls.append(images[tcount].get_attribute('src'))
             tcount += 1
         tcount = 0
         print(image_urls)
-        while tcount < 4:
+        while tcount < 2:
             youtube_dict = {}
             url = href[tcount]
 
@@ -148,4 +148,4 @@ def scrape(url):
     except Exception as e:
         print(e)
         driver.close()
-    return ('', 204)
+    return ('', 200)
