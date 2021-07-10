@@ -4,12 +4,12 @@ from nltk.corpus import stopwords
 from wordcloud import WordCloud, STOPWORDS
 import spacy
 import pandas as pd
+import os
 
 
 def cleanData():
     from nltk.corpus import stopwords
     file = "./output_scraping.csv"
-
     df = pd.read_csv(file, sep=',')
     df.head()
     nlp = spacy.load('en_core_web_sm', disable=['parser', 'ner'])
@@ -32,7 +32,8 @@ def cleanData():
                                    "]+", flags=re.UNICODE)
         return emoji_pattern.sub(r'', text)
 
-    df['new_comments'] = df['new_comments'].apply(lambda x: remove_emoji(x))
+    df['new_comments'] = df['new_comments'].apply(
+        lambda x: remove_emoji(x))
     stop = stopwords.words('english')
     df['new_comments'] = df['new_comments'].apply(
         lambda x: " ".join(x for x in x.split() if x not in stop))
