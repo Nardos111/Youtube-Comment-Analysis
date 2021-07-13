@@ -15,8 +15,8 @@ def scrape(url):
     writer2 = csv.writer(csv_file2)
     writer.writerow(
         ['number', 'comments', 'upvotes'])
-    writer2.writerow(['url', 'link_title', 'description', 'channel',
-                      'no_of_views', 'time_uploaded', 'likes', 'dislikes'])
+    # writer2.writerow(['url', 'link_title', 'description', 'channel',
+    #   'no_of_views', 'time_uploaded', 'likes', 'dislikes'])
     youtube_pages = "https://www.youtube.com/"
     locationOfWebdriver = "./webdrivers/chromedriver"
     driver = webdriver.Chrome(locationOfWebdriver)
@@ -91,16 +91,24 @@ def scrape(url):
                     text = description.text
                     texts.append(text)
                 desc = texts[0].replace("\n", "")
-                description_dict = {}
-                description_dict['url'] = href[tcount]
-                description_dict['link_title'] = title[tcount]
-                description_dict['description'] = desc
-                description_dict['channel'] = channel
-                description_dict['no_of_views'] = numview
-                description_dict['time_uploaded'] = uploaddate
-                description_dict['likes'] = likes
-                description_dict['dislikes'] = dislikes
-                writer2.writerow(description_dict.values())
+                # description_dict = {}
+                writer2.writerow([href[tcount]])
+                writer2.writerow([title[tcount]])
+                writer2.writerow([desc])
+                writer2.writerow([channel])
+                writer2.writerow([numview])
+                writer2.writerow([uploaddate])
+                writer2.writerow([likes])
+                writer2.writerow([dislikes])
+                # description_dict['url'] = href[tcount]
+                # description_dict['link_title'] = title[tcount]
+                # description_dict['description'] = desc
+                # description_dict['channel'] = channel
+                # description_dict['no_of_views'] = numview
+                # description_dict['time_uploaded'] = uploaddate
+                # description_dict['likes'] = likes
+                # description_dict['dislikes'] = dislikes
+                # writer2.writerow(description_dict.values())
                 time.sleep(10)
                 # Loads 20 comments , scroll two times to load next set of 40 comments.
                 for i in range(0, 2):

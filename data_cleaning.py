@@ -4,7 +4,6 @@ from nltk.corpus import stopwords
 from wordcloud import WordCloud, STOPWORDS
 import spacy
 import pandas as pd
-import os
 
 
 def cleanData():

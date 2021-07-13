@@ -247,3 +247,13 @@ hr.star-primary:after {
    margin-top: 20px;
    margin-bottom: 15px;
 }
+
+.content {
+   position: relative;
+   width: 75%;
+   float: left;
+}
+
+.image2 {
+   margin-bottom: 20px;
+}
