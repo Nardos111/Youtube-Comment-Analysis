@@ -1,5 +1,4 @@
 
-
 import csv
 import nltk
 import text2emotion as te
@@ -7,10 +6,10 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 
 
 comments = []
-with open('results.csv', 'r', encoding="utf-16") as file:
+with open('cleandata.csv', 'r', encoding="utf-8") as file:
     reader = csv.reader(file)
     for row in reader:
-        comments.append(row[1])
+        comments.append(row[2])
 combined_comments = ' '.join(comments)
 word: list[str] = nltk.word_tokenize(combined_comments)
 stopwords = nltk.corpus.stopwords.words("english")
